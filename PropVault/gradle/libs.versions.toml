@@ -22,6 +22,8 @@ navigationCompose = "2.8.9"
 retrofit = "2.11.0"
 roomKtx = "2.7.1"
 symbolProcessingApi = "2.1.20-1.0.32"
+googleGmsGoogleServices = "4.4.2"
+firebaseAuth = "23.2.0"
 
 
 [libraries]
@@ -60,10 +62,12 @@ koin-androidx-navigation = { module = "io.insert-koin:koin-androidx-navigation",
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

@@ -23,3 +23,4 @@ rootProject.name = "PropVault"
 include(":app")
 include(":admin")
 include(":customer")
+include(":common")
