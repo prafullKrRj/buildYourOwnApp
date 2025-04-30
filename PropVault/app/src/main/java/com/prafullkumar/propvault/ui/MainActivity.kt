@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.prafullkumar.common.presentation.navigation.MainRoutes
+import com.prafullkumar.propvault.admin.app.ui.appGraph
 import com.prafullkumar.propvault.onBoarding.ui.OnBoardingViewModel
 import com.prafullkumar.propvault.onBoarding.ui.RealEstateLoginScreen
 import com.prafullkumar.propvault.ui.theme.PropVaultTheme
@@ -76,11 +77,7 @@ fun NavGraph(
         modifier = Modifier.fillMaxSize()
     ) {
         onBoardingGraph(navController)
-        composable<MainRoutes.App> {
-            Box(Modifier.fillMaxSize()) {
-                Text("Welcome to the App")
-            }
-        }
+        appGraph(navController)
     }
 }
 

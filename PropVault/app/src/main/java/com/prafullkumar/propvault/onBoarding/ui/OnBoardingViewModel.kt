@@ -7,9 +7,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.prafullkumar.common.utils.Resource
-import com.prafullkumar.propvault.onBoarding.domain.OnBoardingRepository
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -19,7 +16,7 @@ enum class LoginOrSignUp {
 }
 
 class OnBoardingViewModel(
-    private val onBoardingRepository: OnBoardingRepository
+
 ) : ViewModel() {
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -37,23 +34,31 @@ class OnBoardingViewModel(
     fun login(username: String, password: String) {
         viewModelScope.launch {
             if (loginOrSignUp == LoginOrSignUp.LOGIN) {
-                onBoardingRepository.loginUser(username, password, selectedRole).collectLatest {
-                    if (it is Resource.Success) {
-                        errorState = false
-                        _navigateToApp.value = true
-                    } else if (it is Resource.Error) {
-                        errorState = true
+                firebaseAuth.signInWithEmailAndPassword(
+                    "$username@propvault-${if (selectedRole == UserRole.ADMIN) "admin" else "cust"}.com",
+                    password
+                )
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            errorState = false
+                            _navigateToApp.value = true
+                        } else {
+                            errorState = true
+                        }
                     }
-                }
             } else {
-                onBoardingRepository.signUpUser(username, password, selectedRole).collectLatest {
-                    if (it is Resource.Success) {
-                        errorState = false
-                        _navigateToApp.value = true
-                    } else if (it is Resource.Error) {
-                        errorState = true
+                firebaseAuth.createUserWithEmailAndPassword(
+                    "$username@propvault-${if (selectedRole == UserRole.ADMIN) "admin" else "cust"}.com",
+                    password
+                )
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            errorState = false
+                            _navigateToApp.value = true
+                        } else {
+                            errorState = true
+                        }
                     }
-                }
             }
         }
     }

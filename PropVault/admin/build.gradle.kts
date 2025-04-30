@@ -60,4 +60,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.coil.compose)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(project(":common"))
 }
