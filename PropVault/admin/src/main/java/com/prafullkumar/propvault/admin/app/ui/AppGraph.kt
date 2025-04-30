@@ -48,66 +48,11 @@ fun NavGraphBuilder.appGraph(
                 }, navController
             )
         }
-
-        composable<AppRoutes.Units> {
-//            BuildingUnitScreen(
-//                koinViewModel { parametersOf(it.toRoute<AppRoutes.Units>().buildingId) },
-//                navController,
-//                it.toRoute<AppRoutes.Units>()
-//            )
-        }
-        composable<AppRoutes.DevelopmentBuildingsScreen> {
-//            val development = it.toRoute<AppRoutes.DevelopmentBuildingsScreen>()
-//            DevelopmentBuildingScreen(
-//                koinViewModel {
-//                    parametersOf(
-//                        development.developmentId, development.developmentName
-//                    )
-//                }, navController
-//            )
-        }
         composable<AppRoutes.DealScreen> {
             DealScreen(
                 koinViewModel { parametersOf(it.toRoute<AppRoutes.DealScreen>().dealId) },
                 navController
             )
-        }
-        composable<AppRoutes.AddDevelopment> {
-//            AddDevelopmentScreen(
-//                koinViewModel(), navController
-//            )
-        }
-        composable<AppRoutes.AddBuilding> {
-//            val details = it.toRoute<AppRoutes.AddBuilding>()
-//            AddBuildingScreen(koinViewModel {
-//                parametersOf(
-//                    details.developmentId, details.developmentName
-//                )
-//            }, navController)
-        }
-        composable<AppRoutes.EditUnit> {
-//            val unitDetails = it.toRoute<AppRoutes.EditUnit>()
-//            UnitEditingScreen(koinViewModel {
-//                parametersOf(
-//                    unitDetails.unitId
-//                )
-//            }, navController)
-        }
-        composable<AppRoutes.AddUnit> {
-//            AddUnitScreen(
-//                koinViewModel { parametersOf(0) }, navController, it.toRoute<AppRoutes.AddUnit>()
-//            )
-        }
-
-        composable<AppRoutes.UnitScreen> {
-//            UnitScreen(
-//                navController = navController,
-//                viewModel = koinViewModel { parametersOf(it.toRoute<AppRoutes.UnitScreen>().unitId) })
-        }
-        composable<AppRoutes.PaymentsScreen> {
-//            PaymentScreen(
-//                koinViewModel(), navController
-//            )
         }
     }
 }
