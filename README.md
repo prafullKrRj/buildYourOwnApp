@@ -1,91 +1,120 @@
-# Android Intern Project: Build Your Own App
+# 🏢 Property CRM
 
-Ready to flex your Android skills? Welcome to the Android Intern Project! This is your chance to create something awesome and show us what you’ve got. Below, you’ll find everything you need to get started—requirements, steps, and how we’ll check out your work.
+## Real Estate Customer Relationship Management Application
 
-## Project Overview
-In this project, you’ll dream up and build an Android app from scratch. We’re not handing you a blueprint—this is all about your vision. Whether you want to fix something that bugs you, entertain the world, or test a crazy idea, you’re in the driver’s seat. The catch? It needs to be a working app that taps into core Android powers—like slick UI, smart storage, or networking magic. We’ll use this to see how you think, code, and bring ideas to life—key traits we’re looking for in our next intern.
+![Property CRM](https://img.shields.io/badge/Property-CRM-blue)
+![Android](https://img.shields.io/badge/Platform-Android-brightgreen)
+![Kotlin](https://img.shields.io/badge/Language-Kotlin-orange)
+![Firebase](https://img.shields.io/badge/Backend-Firebase-yellow)
+![Version](https://img.shields.io/badge/Version-1.0.0-lightgrey)
 
-## Requirements
-1. **App Idea:** Unleash your imagination—craft an Android app that tackles a real-world annoyance, delivers a burst of fun, or dives into something wild and experimental! Need a nudge? Think along the lines of a clever task-juggling tool, a quirky mini-game to kill boredom, or a weather wizard that surprises with flair. Your idea, your rules—just wow us!  
+<p align="center">
+  <img src="/api/placeholder/800/400" alt="Property CRM Banner" />
+</p>
 
-2. **Technical Specs:**  
-- Language: Kotlin.  
-- Minimum SDK: API 26 (Android 8.0).  
-- Must follow Clean Architecture principles (e.g., separate presentation, domain, and data layers).  
-- Must include at least 3 modern Android features (e.g., Jetpack Compose for UI, Coroutines with Flow for async work, Room for storage, Koin for dependency injection, App Startup for initialization, Navigation Compose, or choose your own) or build all if you want to go all in.  
- 
-3. **Deliverables:**  
-   - **Source code (full project folder)** - *Mandatory* ✅: Include all files needed to build your app.  
-   - **A working APK file** - *Mandatory* ✅: A compiled APK we can install and test.  
-   - **A video demo** - *Mandatory* ✅: A short video showcasing all the flows of your app.  
-   - **A short README file** - *Optional*: 1-2 paragraphs covering:  
-     - What your app does.  
-     - How you built it (e.g., tools, libraries, challenges).  
-     - What are the limitations of the application.  
-     - What’s your next milestone for the application. 
+## 📱 What It Does
 
-## How Your Code Will Be Evaluated
-We’ll review your submission based on these criteria:  
-- **Functionality (30%):** Does the app work as intended? Is the idea clear and usable?  
-- **Android Skills (30%):** Are Android components (e.g., lifecycle, UI, data handling) used correctly and effectively?  
-- **Code Quality (20%):** Is the code clean, readable, and well-organized? Are there comments or logical structure?  
-- **Creativity & Effort (20%):** How unique or interesting is your idea? Did you add polish (e.g., UI design, extra features)?  
+Property CRM is a comprehensive real estate management solution designed for property development companies. The application streamlines the process of managing developments, buildings, units, deals, and payments through an intuitive interface. It features:
 
-**Bonus Tips (Not Mandatory):**  
-- Add **unit tests** (e.g., with JUnit 5) for brownie points 🎉—show us your code’s reliability!  
-- Use **Kotlin Multiplatform** to push boundaries to new heights 🚀—share code across platforms and blow us away!
+* **Single Admin Portal**: Centralized management system for property administrators
+* **Multiple Customer Access**: Allowing potential buyers to browse available properties
+* **End-to-End Deal Management**: From property listing to payment tracking
+* **Real-time Updates**: Using Firebase for instant data synchronization
 
-We’ll run your APK on an emulator or device and inspect your code in Android Studio. Make sure it builds without errors!
+### Key Features
 
-## Steps to Complete the Project
-Follow these instructions to fork, build, and submit your app:
+#### For Admin (Single Access)
+- **Comprehensive Development Management**: Create and manage multiple real estate developments
+- **Hierarchical Building Structure**: Organize buildings within developments
+- **Unit Management**: Track property units with detailed information and pricing
+- **Deal Tracking**: Monitor all property deals from initiation to closing
+- **Payment Processing**: Keep track of all payment transactions
 
-### 1. Fork the Repository
-- Click the **Fork** button at the top-right of this GitHub page. This creates a copy of this repo under your GitHub account.  
-- You’ll work in your forked repo: `https://github.com/your-username/buildYourOwnApp`.
+#### For Customers (Multiple Users)
+- **Property Exploration**: Browse available developments and units
+- **Detailed Unit Information**: Access comprehensive details about potential properties
+- **Streamlined Viewing Experience**: Intuitive navigation through property listings
 
-### 2. Set Up Your Project
-- **Clone the repo:** On your computer, run:  
-  ```
-  git clone https://github.com/your-username/buildYourOwnApp.git
-  ```
-- Open Android Studio:  
-  - Create a new Android project inside the cloned folder (File > New > New Project).  
-  - Use your chosen app name and package (e.g., `com.yourname.myapp`).  
-- Build your app based on your idea, following the requirements above.
+## 🛠️ How It's Built
 
-### 3. Add Your Files
-- Replace this README with your own README explaining your app.  
-- Add your project files (source code) to the repo folder.  
-- Generate an APK: In Android Studio, go to Build > Generate App Bundles or APKs > Generate APK, then upload it to your Google Drive and share the link 📎 with us.
-- Record a video demo: Capture a short video showcasing all your app’s flows, then either include a link to it in your README or upload it to your Google Drive and share the link 📎 with us.
+### Architecture
 
-### 4. Commit and Push Your Work
-- Stage your changes:  
-  ```
-  git add .
-  ```
-- Commit your work:  
-  ```
-  git commit -m "Submit my Android app project"
-  ```
-- Push to your forked repo:  
-  ```
-  git push origin main
-  ```
+Property CRM follows a multi-module architecture with clean separation of concerns:
 
-### 5. Submit Your Project
-- Send us the link to your forked repo (e.g., `https://github.com/your-username/buildYourOwnApp`) via email to shantanu.das@rapido.bike.  
-- Ensure your repo is public so we can review it.
+- **:app**: Main application module that connects all components
+- **:admin**: Contains admin-specific features and interfaces
+- **:common**: Shared models, utilities, and core logic
+- **:customer**: Customer-facing screens and features
 
-## Tips for Success
-- Start simple—focus on a working app, then add extras if time allows.  
-- Test your APK on an emulator or device before submitting.  
-- Use comments in your code to explain tricky parts.  
-- Leverage AI tools at your convenience to speed up your process and showcase your AI skills.  
-- Stuck? Google, Stack Overflow, and Android docs (developer.android.com) are your friends!
+### Tech Stack
 
-## Questions?
-If you need clarification, reach out to shantanu.das@rapido.bike. We’re excited to see what you create!
+- **Language**: 100% Kotlin
+- **UI Framework**: Jetpack Compose
+- **Architecture**: MVVM + Clean Architecture
+- **Backend**: Firebase (Firestore, Authentication)
+- **Async Operations**: Kotlin Coroutines with Flow
+- **Dependency Injection**: Koin
+- **Navigation**: Jetpack Navigation Compose
 
-Good luck, and have fun building!
+### Core Models
+
+The application is built around five main data models:
+
+1. **Development**: Real estate development projects
+2. **Building**: Structures within developments
+3. **PropertyUnit**: Individual units available for purchase
+4. **Deal**: Sales transactions with customers
+5. **Payment**: Financial transactions related to deals
+
+### Application Flow
+
+<p align="center">
+  <img src="/api/placeholder/800/500" alt="Application Flow" />
+</p>
+
+## ⚠️ Limitations
+
+- Currently limited to Android platform only
+- Offline functionality is limited; requires internet connection for most features
+- No multi-language support at this stage
+- Limited reporting and analytics capabilities
+- No integration with external payment gateways
+
+## 🚀 Future Roadmap
+
+### Short-term Goals
+- Add comprehensive unit testing
+- Implement offline caching for better connectivity handling
+- Add document management for property contracts
+- Enhance UI with animations and transitions
+
+### Long-term Vision
+- Expand to iOS using Kotlin Multiplatform
+- Implement advanced analytics dashboard
+- Add integrated chat functionality between admin and customers
+- Integrate with popular CRM systems for data synchronization
+- Add AI-powered recommendations for potential buyers
+
+## 📥 Installation
+
+1. Download the APK from [here](link-to-your-apk)
+2. Enable installation from unknown sources in your Android settings
+3. Install the application
+4. Log in as admin or browse as a customer
+
+  For admin use username: admin and password: password
+  
+## 🎬 Demo
+
+Check out the [video demonstration](link-to-your-video) to see Property CRM in action!
+
+## 📋 Requirements
+
+- Android 8.0 (API level 26) or higher
+- Internet connection
+  
+---
+
+<p align="center">
+  Made with ❤️ by Prafull Kumar
+</p>
