@@ -9,8 +9,9 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-lightgrey)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/prafullKrRj/buildYourOwnApp/refs/heads/main/PropVault/app/src/main/res/drawable/real_estate.png" alt="Property CRM Banner" />
+  <img src="https://raw.githubusercontent.com/prafullKrRj/buildYourOwnApp/refs/heads/main/PropVault/app/src/main/res/drawable/real_estate.png" alt="Property CRM Banner" width="200"/>
 </p>
+
 
 ## 📱 What It Does
 
