@@ -47,6 +47,11 @@ Property CRM follows a multi-module architecture with clean separation of concer
 - **:common**: Shared models, utilities, and core logic
 - **:customer**: Customer-facing screens and features
 
+### How to use
+
+For Admin: use "admin" as username and "password" as password
+For Customer: Either create account or login using username: "customer", password: "password"
+
 ### Tech Stack
 
 - **Language**: 100% Kotlin
@@ -147,7 +152,7 @@ graph TD
 - No multi-language support at this stage
 - Limited reporting and analytics capabilities
 - No integration with external payment gateways
-
+- No Multiple admins.
 ## 🚀 Future Roadmap
 
 ### Short-term Goals
@@ -157,6 +162,7 @@ graph TD
 - Enhance UI with animations and transitions
 
 ### Long-term Vision
+- Adding multiple admins section and proper contacting and transfer contracts.
 - Expand to iOS using Kotlin Multiplatform
 - Implement advanced analytics dashboard
 - Add integrated chat functionality between admin and customers
@@ -165,7 +171,7 @@ graph TD
 
 ## 📥 Installation
 
-1. Download the APK from [here](link-to-your-apk)
+1. Download the APK from [here](https://drive.google.com/file/d/1nN3_P0IjP0si6kLQ_avVdUz10Wr4Zme0/view?usp=sharing)
 2. Enable installation from unknown sources in your Android settings
 3. Install the application
 4. Log in as admin or browse as a customer
@@ -174,7 +180,7 @@ graph TD
   
 ## 🎬 Demo
 
-Check out the [video demonstration](link-to-your-video) to see Property CRM in action!
+Check out the [video demonstration](https://drive.google.com/file/d/1bSxdPi0EWtsKz7fS-Y0AjxyVrt2SG39F/view?usp=sharing) to see Property CRM in action!
 
 ## 📋 Requirements
 
