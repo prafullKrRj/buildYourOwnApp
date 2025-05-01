@@ -1,4 +1,4 @@
-# 🏢 Property CRM
+# 🏢 PropVault
 
 ## Real Estate Customer Relationship Management Application
 
@@ -9,7 +9,7 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-lightgrey)
 
 <p align="center">
-  <img src="/api/placeholder/800/400" alt="Property CRM Banner" />
+  <img src="https://raw.githubusercontent.com/prafullKrRj/buildYourOwnApp/refs/heads/main/PropVault/app/src/main/res/drawable/real_estate.png" alt="Property CRM Banner" />
 </p>
 
 ## 📱 What It Does
@@ -138,7 +138,7 @@ graph TD
         PropertyUnit --- Deal
         Deal --- Payment
     end
-
+```
 ## ⚠️ Limitations
 
 - Currently limited to Android platform only
