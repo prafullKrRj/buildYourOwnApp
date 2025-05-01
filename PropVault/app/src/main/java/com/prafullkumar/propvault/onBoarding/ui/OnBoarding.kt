@@ -45,7 +45,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -66,10 +65,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.prafullkumar.common.presentation.navigation.MainRoutes
+import com.prafullkumar.common.navigation.MainRoutes
 import com.prafullkumar.propvault.R
 import kotlinx.coroutines.delay
-
 enum class UserRole {
     ADMIN,
     CUSTOMER
@@ -83,25 +81,28 @@ fun RealEstateLoginScreen(
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    var loginOrSignUp by rememberSaveable { mutableStateOf(LoginOrSignUp.LOGIN) }
     var isLoading by rememberSaveable { mutableStateOf(false) }
-    val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
-
     var showContent by remember { mutableStateOf(false) }
 
-
+    // Reset login/signup mode if role changes to admin (admins can only login)
+    LaunchedEffect(viewModel.selectedRole) {
+        if (viewModel.selectedRole == UserRole.ADMIN && viewModel.loginOrSignUp == LoginOrSignUp.SIGNUP) {
+            viewModel.loginOrSignUp = LoginOrSignUp.LOGIN
+        }
+    }
 
     if (viewModel.navigateToApp.value) {
         LaunchedEffect(Unit) {
-            navController.navigate(MainRoutes.App) {
+            navController.navigate(
+                if (viewModel.selectedRole == UserRole.CUSTOMER) MainRoutes.Customer else MainRoutes.Admin
+            ) {
                 popUpTo(MainRoutes.OnBoarding) {
                     inclusive = true
                 }
             }
         }
     }
-
 
     LaunchedEffect(key1 = true) {
         delay(100)
@@ -199,31 +200,7 @@ fun RealEstateLoginScreen(
                             .padding(horizontal = 24.dp, vertical = 32.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(56.dp)
-                                .clip(RoundedCornerShape(28.dp))
-                                .background(MaterialTheme.colorScheme.surfaceVariant)
-                                .padding(4.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            SelectionTab(
-                                modifier = Modifier.weight(1f),
-                                title = "Login",
-                                isSelected = viewModel.loginOrSignUp == LoginOrSignUp.LOGIN,
-                                onClick = { viewModel.loginOrSignUp = LoginOrSignUp.LOGIN }
-                            )
-
-                            SelectionTab(
-                                modifier = Modifier.weight(1f),
-                                title = "Sign Up",
-                                isSelected = viewModel.loginOrSignUp == LoginOrSignUp.SIGNUP,
-                                onClick = { viewModel.loginOrSignUp = LoginOrSignUp.SIGNUP }
-                            )
-                        }
-
+                        // User Role Selection
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -246,20 +223,61 @@ fun RealEstateLoginScreen(
                             SelectionTab(
                                 modifier = Modifier.weight(1f),
                                 title = "Admin",
-                                isSelected =  viewModel.selectedRole == UserRole.ADMIN,
+                                isSelected = viewModel.selectedRole == UserRole.ADMIN,
                                 onClick = {
                                     viewModel.selectedRole = UserRole.ADMIN
+                                    // Force LOGIN mode for admin
+                                    viewModel.loginOrSignUp = LoginOrSignUp.LOGIN
                                 }
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        // Login/Signup tabs - only shown for Customer role
+                        if (viewModel.selectedRole == UserRole.CUSTOMER) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(56.dp)
+                                    .clip(RoundedCornerShape(28.dp))
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                                    .padding(4.dp),
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                SelectionTab(
+                                    modifier = Modifier.weight(1f),
+                                    title = "Login",
+                                    isSelected = viewModel.loginOrSignUp == LoginOrSignUp.LOGIN,
+                                    onClick = { viewModel.loginOrSignUp = LoginOrSignUp.LOGIN }
+                                )
+
+                                SelectionTab(
+                                    modifier = Modifier.weight(1f),
+                                    title = "Sign Up",
+                                    isSelected = viewModel.loginOrSignUp == LoginOrSignUp.SIGNUP,
+                                    onClick = { viewModel.loginOrSignUp = LoginOrSignUp.SIGNUP }
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(24.dp))
+                        } else {
+                            // For Admin, show login title
+                            Text(
+                                text = "Admin Login",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(vertical = 16.dp)
+                            )
+                        }
 
                         OutlinedTextField(
                             value = username,
                             onValueChange = { username = it },
                             modifier = Modifier.fillMaxWidth(),
-                            label = { Text("Email") },
+                            label = { Text("Username") },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Default.Person,
@@ -325,13 +343,16 @@ fun RealEstateLoginScreen(
                             )
                         )
 
-
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Button(
                             onClick = {
                                 isLoading = true
-                                viewModel.login(username, password)
+                                if (viewModel.selectedRole == UserRole.ADMIN || viewModel.loginOrSignUp == LoginOrSignUp.LOGIN) {
+                                    viewModel.login(username, password)
+                                } else {
+                                    viewModel.signup(username, password)
+                                }
                                 isLoading = false
                             },
                             modifier = Modifier
@@ -350,8 +371,13 @@ fun RealEstateLoginScreen(
                                     strokeWidth = 2.dp
                                 )
                             } else {
+                                val actionText = when {
+                                    viewModel.selectedRole == UserRole.ADMIN -> "Login as Admin"
+                                    viewModel.loginOrSignUp == LoginOrSignUp.LOGIN -> "Login as Customer"
+                                    else -> "Sign Up as Customer"
+                                }
                                 Text(
-                                    text = "Login as ${ viewModel.selectedRole.name.lowercase().capitalize()}",
+                                    text = actionText,
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Medium
                                 )

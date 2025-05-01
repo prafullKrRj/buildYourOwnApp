@@ -47,20 +47,24 @@ class OnBoardingViewModel(
                         }
                     }
             } else {
-                firebaseAuth.createUserWithEmailAndPassword(
-                    "$username@propvault-${if (selectedRole == UserRole.ADMIN) "admin" else "cust"}.com",
-                    password
-                )
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            errorState = false
-                            _navigateToApp.value = true
-                        } else {
-                            errorState = true
-                        }
-                    }
+
             }
         }
+    }
+
+    fun signup(username: String, password: String) {
+        firebaseAuth.createUserWithEmailAndPassword(
+            "$username@propvault-cust.com",
+            password
+        )
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    errorState = false
+                    _navigateToApp.value = true
+                } else {
+                    errorState = true
+                }
+            }
     }
 
 }

@@ -92,4 +92,5 @@ dependencies {
 
     implementation(project(":common"))
     implementation(project(":admin"))
+    implementation(project(":customer"))
 }

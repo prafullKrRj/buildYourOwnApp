@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.plugin.serialization")
     alias(libs.plugins.kotlin.compose)
-
+    id("kotlin-parcelize")
 }
 
 android {
@@ -62,5 +62,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     implementation(project(":common"))
 }

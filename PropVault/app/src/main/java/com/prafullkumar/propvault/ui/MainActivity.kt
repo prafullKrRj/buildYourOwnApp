@@ -5,9 +5,7 @@ import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -19,8 +17,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.google.firebase.auth.FirebaseAuth
-import com.prafullkumar.common.presentation.navigation.MainRoutes
-import com.prafullkumar.propvault.admin.app.ui.appGraph
+import com.prafullkumar.common.navigation.MainRoutes
+import com.prafullkumar.propvault.admin.app.ui.adminGraph
+import com.prafullkumar.propvault.customer.app.presentation.navigation.customerGraph
 import com.prafullkumar.propvault.onBoarding.ui.OnBoardingViewModel
 import com.prafullkumar.propvault.onBoarding.ui.RealEstateLoginScreen
 import com.prafullkumar.propvault.ui.theme.PropVaultTheme
@@ -36,7 +35,11 @@ class MainActivity : ComponentActivity() {
             PropVaultTheme {
                 val navController = rememberNavController()
                 val startDestination = if (FirebaseAuth.getInstance().currentUser != null) {
-                    MainRoutes.App
+                    if (FirebaseAuth.getInstance().currentUser?.email?.contains("admin")!!) {
+                        MainRoutes.Admin
+                    } else {
+                        MainRoutes.Customer
+                    }
                 } else {
                     MainRoutes.OnBoarding
                 }
@@ -45,20 +48,19 @@ class MainActivity : ComponentActivity() {
                     startDestination = startDestination,
                     updateLoginStatus = { isLoggedIn ->
                         if (isLoggedIn) {
-                            navController.navigate(MainRoutes.App) {
+                            navController.navigate(MainRoutes.Admin) {
                                 popUpTo(MainRoutes.OnBoarding) {
                                     inclusive = true
                                 }
                             }
                         } else {
                             navController.navigate(MainRoutes.OnBoarding) {
-                                popUpTo(MainRoutes.App) {
+                                popUpTo(MainRoutes.Admin) {
                                     inclusive = true
                                 }
                             }
                         }
-                    }
-                )
+                    })
             }
         }
     }
@@ -77,7 +79,8 @@ fun NavGraph(
         modifier = Modifier.fillMaxSize()
     ) {
         onBoardingGraph(navController)
-        appGraph(navController)
+        adminGraph(navController)
+        customerGraph(navController)
     }
 }
 
@@ -100,8 +103,7 @@ fun NavGraphBuilder.onBoardingGraph(
     navigation<MainRoutes.OnBoarding>(startDestination = OnBoardingRoutes.Login) {
         composable<OnBoardingRoutes.Login> {
             RealEstateLoginScreen(
-                koinViewModel<OnBoardingViewModel>(),
-                navController = navController
+                koinViewModel<OnBoardingViewModel>(), navController = navController
             )
         }
     }

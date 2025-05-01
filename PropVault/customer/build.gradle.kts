@@ -62,11 +62,14 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     implementation(libs.androidx.navigation.compose)
-
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 // material icons
     implementation(libs.androidx.material.icons.extended)
 
 // coil
     implementation(libs.coil.compose)
+    implementation(libs.kotlinx.serialization.json)
 
+    implementation(project(":common"))
 }
