@@ -12,8 +12,7 @@ import kotlinx.coroutines.launch
 
 
 enum class LoginOrSignUp {
-    LOGIN,
-    SIGNUP
+    LOGIN, SIGNUP
 }
 
 /**
@@ -27,7 +26,7 @@ class OnBoardingViewModel : ViewModel() {
 
     // State to track authentication errors
     var errorState by mutableStateOf(false)
-
+    var errorText by mutableStateOf("")
     // Navigation state to determine when to navigate to main app
     private val _navigateToApp = mutableStateOf(false)
     val navigateToApp: State<Boolean> get() = _navigateToApp
@@ -36,6 +35,8 @@ class OnBoardingViewModel : ViewModel() {
     var loginOrSignUp by mutableStateOf(LoginOrSignUp.LOGIN)
     var selectedRole by mutableStateOf(UserRole.CUSTOMER)
 
+    var loggingIn by mutableStateOf(false)
+
     /**
      * Handles user login with email and password.
      * Constructs email based on username and selected role (admin/customer).
@@ -43,22 +44,23 @@ class OnBoardingViewModel : ViewModel() {
      * @param password User's input password
      */
     fun login(username: String, password: String) {
+        loggingIn = true
         viewModelScope.launch {
-            if (loginOrSignUp == LoginOrSignUp.LOGIN) {
-                firebaseAuth.signInWithEmailAndPassword(
-                    "$username@propvault-${if (selectedRole == UserRole.ADMIN) "admin" else "cust"}.com",
-                    password
-                )
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            errorState = false
-                            _navigateToApp.value = true
-                        } else {
-                            errorState = true
-                        }
-                    }
-            } else {
-
+            firebaseAuth.signInWithEmailAndPassword(
+                "$username@propvault-${if (selectedRole == UserRole.ADMIN) "admin" else "cust"}.com",
+                password
+            ).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    errorState = false
+                    _navigateToApp.value = true
+                } else {
+                    errorState = true
+                }
+                loggingIn = false
+            }.addOnFailureListener {
+                loggingIn = false
+                errorState = true
+                errorText = it.message.toString()
             }
         }
     }
@@ -70,18 +72,23 @@ class OnBoardingViewModel : ViewModel() {
      * @param password User's input password
      */
     fun signup(username: String, password: String) {
+        loggingIn = true
         firebaseAuth.createUserWithEmailAndPassword(
-            "$username@propvault-cust.com",
-            password
-        )
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    errorState = false
-                    _navigateToApp.value = true
-                } else {
-                    errorState = true
-                }
+            "$username@propvault-cust.com", password
+        ).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                errorState = false
+                loggingIn = true
+                _navigateToApp.value = true
+            } else {
+                errorState = true
+                loggingIn = false
             }
+        }.addOnFailureListener {
+            loggingIn = false
+            errorState = true
+            errorText = it.message.toString()
+        }
     }
 
 }

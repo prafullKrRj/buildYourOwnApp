@@ -347,15 +347,22 @@ fun RealEstateLoginScreen(
 
                         Spacer(modifier = Modifier.height(16.dp))
 
+                        if (viewModel.errorState) {
+                            Text(
+                                text = "* ${viewModel.errorText}",
+                                color = MaterialTheme.colorScheme.error,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+
                         Button(
                             onClick = {
-                                isLoading = true
                                 if (viewModel.selectedRole == UserRole.ADMIN || viewModel.loginOrSignUp == LoginOrSignUp.LOGIN) {
                                     viewModel.login(username, password)
                                 } else {
                                     viewModel.signup(username, password)
                                 }
-                                isLoading = false
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -364,9 +371,9 @@ fun RealEstateLoginScreen(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.primary
                             ),
-                            enabled = username.isNotEmpty() && password.isNotEmpty() && !isLoading
+                            enabled = username.isNotEmpty() && password.isNotEmpty() && !viewModel.loggingIn
                         ) {
-                            if (isLoading) {
+                            if (viewModel.loggingIn) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(24.dp),
                                     color = MaterialTheme.colorScheme.onPrimary,
