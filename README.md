@@ -67,10 +67,77 @@ The application is built around five main data models:
 5. **Payment**: Financial transactions related to deals
 
 ### Application Flow
+```mermaid
+graph TD
+    %% Project Module Structure
+    subgraph ProjectModules["Project Modules"]
+        AppModule[":app - Main Application"]
+        CommonModule[":common - Models & Shared Logic"]
+        AdminModule[":admin - Admin Features"]
+        CustomerModule[":customer - Customer Features"]
+        
+        AppModule --> CommonModule
+        AppModule --> AdminModule
+        AppModule --> CustomerModule
+        AdminModule --> CommonModule
+        CustomerModule --> CommonModule
+    end
 
-<p align="center">
-  <img src="/api/placeholder/800/500" alt="Application Flow" />
-</p>
+    %% Admin Module Flow
+    subgraph AdminModule["Admin Module Flow"]
+        AdminHome[Admin Home]
+        
+        %% Development Flow
+        DevList[Developments List]
+        BuildingList[Buildings List]
+        UnitsList[Units List]
+        UnitScreen[Unit Details Screen]
+        AddUnitScreen[Add Unit Screen]
+        EditUnitScreen[Edit Unit Screen]
+        
+        %% Payments Flow
+        AdminPayments[Payments Screen]
+        
+        %% Deals Flow
+        DealsListScreen[Deals List]
+        DealDetailsScreen[Deal Details Screen]
+        
+        AdminHome --> AdminPayments
+        AdminHome --> DevList
+        AdminHome --> DealsListScreen
+        
+        DevList --> BuildingList
+        BuildingList --> UnitsList 
+        UnitsList --> UnitScreen
+        UnitsList --> AddUnitScreen
+        UnitScreen --> EditUnitScreen
+        
+        DealsListScreen --> DealDetailsScreen
+    end
+    
+    %% Customer Module Flow
+    subgraph CustomerModule["Customer Module Flow"]
+        CustomerHome[Customer Home]
+        PropertyListScreen[Properties List]
+        UnitDetailsScreen[Unit Details]
+        
+        CustomerHome --> PropertyListScreen
+        PropertyListScreen --> UnitDetailsScreen
+    end
+    
+    %% Common Module - Models
+    subgraph CommonModule["Common Module - Models"]
+        Development[Development.kt]
+        Building[Building.kt]
+        PropertyUnit[PropertyUnit.kt]
+        Deal[Deal.kt]
+        Payment[Payment.kt]
+        
+        Development --- Building
+        Building --- PropertyUnit
+        PropertyUnit --- Deal
+        Deal --- Payment
+    end
 
 ## ⚠️ Limitations
 
