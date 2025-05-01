@@ -27,7 +27,6 @@ import com.prafullkumar.propvault.admin.app.navigation.AdminRoutes
 import com.prafullkumar.propvault.admin.features.developments.presentation.viewmodels.BuildingUnitViewModel
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BuildingUnitScreen(
     viewModel: BuildingUnitViewModel, navController: NavController, data: AdminRoutes.Units

@@ -1,4 +1,4 @@
-package com.prafullkumar.propvault.onBoarding.ui
+package com.prafullkumar.propvault.onBoarding.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -67,6 +67,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.prafullkumar.common.navigation.MainRoutes
 import com.prafullkumar.propvault.R
+import com.prafullkumar.propvault.onBoarding.ui.viewmodel.LoginOrSignUp
+import com.prafullkumar.propvault.onBoarding.ui.viewmodel.OnBoardingViewModel
 import kotlinx.coroutines.delay
 enum class UserRole {
     ADMIN,

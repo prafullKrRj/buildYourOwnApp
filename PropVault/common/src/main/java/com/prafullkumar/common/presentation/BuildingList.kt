@@ -41,7 +41,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-
+// buildings list
 @Composable
 fun BuildingsList(
     buildings: List<Building>, onBuildingClick: (Building) -> Unit = {}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "893247246664",
+    "project_id": "propvault-5e227",
+    "storage_bucket": "propvault-5e227.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893247246664:android:c6d8c8d935c775a986e37d",
+        "android_client_info": {
+          "package_name": "com.prafullkumar.propvault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZIRxLWhwbTBcdZTik1MY5pHSjJUnR-5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

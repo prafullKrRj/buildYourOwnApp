@@ -43,7 +43,6 @@ class CustomerRepositoryImpl : CustomerRepository {
             }
         }
     }
-
 }
 
 fun DocumentSnapshot?.toPropertyUnit(): PropertyUnit {
