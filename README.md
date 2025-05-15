@@ -1,6 +1,5 @@
 # 🏢 PropVault
 
-## Real Estate Customer Relationship Management Application
 
 ![PropVault](https://img.shields.io/badge/PropVault-blue)
 ![Android](https://img.shields.io/badge/Platform-Android-brightgreen)
@@ -8,13 +7,9 @@
 ![Firebase](https://img.shields.io/badge/Backend-Firebase-yellow)
 ![Version](https://img.shields.io/badge/Version-1.0.0-lightgrey)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/prafullKrRj/buildYourOwnApp/refs/heads/main/PropVault/app/src/main/res/drawable/real_estate.png" alt="PropVault Banner" width="200"/>
-</p>
-
 ## 📱 What It Does
 
-**PropVault** is a comprehensive real estate management solution designed for property development companies. The application streamlines the process of managing developments, buildings, units, deals, and payments through an intuitive interface. It features:
+**PropVault** is a comprehensive project estate management solution designed for property development companies. The application streamlines the process of managing developments, buildings, units, deals, and payments through an intuitive interface. It features:
 
 * **Single Admin Portal**: Centralized management system for property administrators  
 * **Multiple Customer Access**: Allowing potential buyers to browse available properties  
